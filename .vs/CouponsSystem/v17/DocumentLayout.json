@@ -1,22 +1,22 @@
 {
   "Version": 1,
-  "WorkspaceRootPath": "C:\\Users\\lidar\\OneDrive\\Desktop\\CouponsSystem\\",
+  "WorkspaceRootPath": "C:\\src\\github.com\\lidarbd\\CouponsSystem\\",
   "Documents": [
     {
-      "AbsoluteMoniker": "D:0:0:{B8AB8F4F-894A-4D01-9C38-A86EB79BABBF}|CouponsSystem\\CouponsSystem.csproj|c:\\users\\lidar\\onedrive\\desktop\\couponssystem\\couponssystem\\data\\appdbcontext.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
-      "RelativeMoniker": "D:0:0:{B8AB8F4F-894A-4D01-9C38-A86EB79BABBF}|CouponsSystem\\CouponsSystem.csproj|solutionrelative:couponssystem\\data\\appdbcontext.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+      "AbsoluteMoniker": "D:0:0:{B8AB8F4F-894A-4D01-9C38-A86EB79BABBF}|CouponsSystem\\CouponsSystem.csproj|c:\\src\\github.com\\lidarbd\\couponssystem\\couponssystem\\models\\usersystem.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{B8AB8F4F-894A-4D01-9C38-A86EB79BABBF}|CouponsSystem\\CouponsSystem.csproj|solutionrelative:couponssystem\\models\\usersystem.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
     },
     {
-      "AbsoluteMoniker": "D:0:0:{B8AB8F4F-894A-4D01-9C38-A86EB79BABBF}|CouponsSystem\\CouponsSystem.csproj|c:\\users\\lidar\\onedrive\\desktop\\couponssystem\\couponssystem\\couponssystem.csproj||{FA3CD31E-987B-443A-9B81-186104E8DAC1}|",
-      "RelativeMoniker": "D:0:0:{B8AB8F4F-894A-4D01-9C38-A86EB79BABBF}|CouponsSystem\\CouponsSystem.csproj|solutionrelative:couponssystem\\couponssystem.csproj||{FA3CD31E-987B-443A-9B81-186104E8DAC1}|"
-    },
-    {
-      "AbsoluteMoniker": "D:0:0:{B8AB8F4F-894A-4D01-9C38-A86EB79BABBF}|CouponsSystem\\CouponsSystem.csproj|c:\\users\\lidar\\onedrive\\desktop\\couponssystem\\couponssystem\\controllers\\couponssystemcontroller.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "AbsoluteMoniker": "D:0:0:{B8AB8F4F-894A-4D01-9C38-A86EB79BABBF}|CouponsSystem\\CouponsSystem.csproj|c:\\src\\github.com\\lidarbd\\couponssystem\\couponssystem\\controllers\\couponssystemcontroller.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
       "RelativeMoniker": "D:0:0:{B8AB8F4F-894A-4D01-9C38-A86EB79BABBF}|CouponsSystem\\CouponsSystem.csproj|solutionrelative:couponssystem\\controllers\\couponssystemcontroller.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
     },
     {
-      "AbsoluteMoniker": "D:0:0:{B8AB8F4F-894A-4D01-9C38-A86EB79BABBF}|CouponsSystem\\CouponsSystem.csproj|c:\\users\\lidar\\onedrive\\desktop\\couponssystem\\couponssystem\\program.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "AbsoluteMoniker": "D:0:0:{B8AB8F4F-894A-4D01-9C38-A86EB79BABBF}|CouponsSystem\\CouponsSystem.csproj|c:\\src\\github.com\\lidarbd\\couponssystem\\couponssystem\\program.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
       "RelativeMoniker": "D:0:0:{B8AB8F4F-894A-4D01-9C38-A86EB79BABBF}|CouponsSystem\\CouponsSystem.csproj|solutionrelative:couponssystem\\program.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{B8AB8F4F-894A-4D01-9C38-A86EB79BABBF}|CouponsSystem\\CouponsSystem.csproj|c:\\src\\github.com\\lidarbd\\couponssystem\\couponssystem\\models\\coupon.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{B8AB8F4F-894A-4D01-9C38-A86EB79BABBF}|CouponsSystem\\CouponsSystem.csproj|solutionrelative:couponssystem\\models\\coupon.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
     }
   ],
   "DocumentGroupContainers": [
@@ -31,40 +31,14 @@
             {
               "$type": "Document",
               "DocumentIndex": 0,
-              "Title": "AppDBContext.cs",
-              "DocumentMoniker": "C:\\Users\\lidar\\OneDrive\\Desktop\\CouponsSystem\\CouponsSystem\\Data\\AppDBContext.cs",
-              "RelativeDocumentMoniker": "CouponsSystem\\Data\\AppDBContext.cs",
-              "ToolTip": "C:\\Users\\lidar\\OneDrive\\Desktop\\CouponsSystem\\CouponsSystem\\Data\\AppDBContext.cs",
-              "RelativeToolTip": "CouponsSystem\\Data\\AppDBContext.cs",
-              "ViewState": "AgIAAAAAAAAAAAAAAAAAAAQAAAApAAAAAAAAAA==",
+              "Title": "UserSystem.cs",
+              "DocumentMoniker": "C:\\src\\github.com\\lidarbd\\CouponsSystem\\CouponsSystem\\Models\\UserSystem.cs",
+              "RelativeDocumentMoniker": "CouponsSystem\\Models\\UserSystem.cs",
+              "ToolTip": "C:\\src\\github.com\\lidarbd\\CouponsSystem\\CouponsSystem\\Models\\UserSystem.cs",
+              "RelativeToolTip": "CouponsSystem\\Models\\UserSystem.cs",
+              "ViewState": "AgIAACYAAAAAAAAAAAAvwDkAAAAgAAAAAAAAAA==",
               "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
-              "WhenOpened": "2024-11-18T11:15:11.499Z",
-              "EditorCaption": ""
-            },
-            {
-              "$type": "Document",
-              "DocumentIndex": 1,
-              "Title": "CouponsSystem",
-              "DocumentMoniker": "C:\\Users\\lidar\\OneDrive\\Desktop\\CouponsSystem\\CouponsSystem\\CouponsSystem.csproj",
-              "RelativeDocumentMoniker": "CouponsSystem\\CouponsSystem.csproj",
-              "ToolTip": "C:\\Users\\lidar\\OneDrive\\Desktop\\CouponsSystem\\CouponsSystem\\CouponsSystem.csproj",
-              "RelativeToolTip": "CouponsSystem\\CouponsSystem.csproj",
-              "ViewState": "AgIAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA==",
-              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000758|",
-              "WhenOpened": "2024-11-18T11:14:29.344Z",
-              "EditorCaption": ""
-            },
-            {
-              "$type": "Document",
-              "DocumentIndex": 2,
-              "Title": "CouponsSystemController.cs",
-              "DocumentMoniker": "C:\\Users\\lidar\\OneDrive\\Desktop\\CouponsSystem\\CouponsSystem\\Controllers\\CouponsSystemController.cs",
-              "RelativeDocumentMoniker": "CouponsSystem\\Controllers\\CouponsSystemController.cs",
-              "ToolTip": "C:\\Users\\lidar\\OneDrive\\Desktop\\CouponsSystem\\CouponsSystem\\Controllers\\CouponsSystemController.cs",
-              "RelativeToolTip": "CouponsSystem\\Controllers\\CouponsSystemController.cs",
-              "ViewState": "AgIAAAAAAAAAAAAAAAAAAA4AAAAFAAAAAAAAAA==",
-              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
-              "WhenOpened": "2024-11-18T11:13:21.084Z",
+              "WhenOpened": "2024-11-18T21:02:37.513Z",
               "EditorCaption": ""
             },
             {
@@ -74,14 +48,40 @@
             {
               "$type": "Document",
               "DocumentIndex": 3,
-              "Title": "Program.cs",
-              "DocumentMoniker": "C:\\Users\\lidar\\OneDrive\\Desktop\\CouponsSystem\\CouponsSystem\\Program.cs",
-              "RelativeDocumentMoniker": "CouponsSystem\\Program.cs",
-              "ToolTip": "C:\\Users\\lidar\\OneDrive\\Desktop\\CouponsSystem\\CouponsSystem\\Program.cs",
-              "RelativeToolTip": "CouponsSystem\\Program.cs",
-              "ViewState": "AgIAAAAAAAAAAAAAAAAAAA4AAAAUAAAAAAAAAA==",
+              "Title": "Coupon.cs",
+              "DocumentMoniker": "C:\\src\\github.com\\lidarbd\\CouponsSystem\\CouponsSystem\\Models\\Coupon.cs",
+              "RelativeDocumentMoniker": "CouponsSystem\\Models\\Coupon.cs",
+              "ToolTip": "C:\\src\\github.com\\lidarbd\\CouponsSystem\\CouponsSystem\\Models\\Coupon.cs",
+              "RelativeToolTip": "CouponsSystem\\Models\\Coupon.cs",
+              "ViewState": "AgIAAAAAAAAAAAAAAAAAAAIAAAAAAAAAAAAAAA==",
               "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
-              "WhenOpened": "2024-11-18T11:12:30.254Z",
+              "WhenOpened": "2024-11-18T21:10:41.546Z",
+              "EditorCaption": ""
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 2,
+              "Title": "Program.cs",
+              "DocumentMoniker": "C:\\src\\github.com\\lidarbd\\CouponsSystem\\CouponsSystem\\Program.cs",
+              "RelativeDocumentMoniker": "CouponsSystem\\Program.cs",
+              "ToolTip": "C:\\src\\github.com\\lidarbd\\CouponsSystem\\CouponsSystem\\Program.cs",
+              "RelativeToolTip": "CouponsSystem\\Program.cs",
+              "ViewState": "AgIAAAAAAAAAAAAAAAAAACQAAAAAAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
+              "WhenOpened": "2024-11-18T18:09:10.242Z",
+              "EditorCaption": ""
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 1,
+              "Title": "CouponsSystemController.cs",
+              "DocumentMoniker": "C:\\src\\github.com\\lidarbd\\CouponsSystem\\CouponsSystem\\Controllers\\CouponsSystemController.cs",
+              "RelativeDocumentMoniker": "CouponsSystem\\Controllers\\CouponsSystemController.cs",
+              "ToolTip": "C:\\src\\github.com\\lidarbd\\CouponsSystem\\CouponsSystem\\Controllers\\CouponsSystemController.cs",
+              "RelativeToolTip": "CouponsSystem\\Controllers\\CouponsSystemController.cs",
+              "ViewState": "AgIAAEYAAAAAAAAAAAAcwFgAAAA7AAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
+              "WhenOpened": "2024-11-18T14:03:26.833Z",
               "EditorCaption": ""
             }
           ]
