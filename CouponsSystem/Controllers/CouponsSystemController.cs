@@ -178,6 +178,26 @@ namespace CouponsSystem.Controllers
             return NotFound("Coupon not found.");
         }
 
+        [HttpPost("applyCoupons")]
+        public async Task<IActionResult> ApplyCoupons([FromBody] List<string> couponCodes)
+        {
+            if (couponCodes == null || couponCodes.Count == 0)
+            {
+                return BadRequest("Please provide at least one coupon code.");
+            }
+
+            try
+            {
+                double finalPrice = await _couponsManager.CalculateFinalPriceAsync(couponCodes);
+                return Ok(new { FinalPrice = finalPrice });
+            }
+            catch (Exception ex)
+            {
+                return BadRequest($"Error applying coupons: {ex.Message}");
+            }
+        }
+
+
         [HttpGet]
         public async Task<IActionResult> GetAllCoupons()
         {
