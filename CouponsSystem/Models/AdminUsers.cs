@@ -1,10 +1,12 @@
-﻿using System.Security.Cryptography;
+﻿using System.ComponentModel.DataAnnotations;
+using System.Security.Cryptography;
 using System.Text;
 
 namespace CouponsSystem.Models
 {
     public class AdminUsers
     {
+        [Key]
         public int Id { get; set; }
         public string Username { get; set; } = string.Empty;
         public string HashedPassword { get; set; } = string.Empty;
