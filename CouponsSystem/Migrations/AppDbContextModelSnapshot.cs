@@ -22,7 +22,7 @@ namespace CouponsSystem.Migrations
 
             MySqlModelBuilderExtensions.AutoIncrementColumns(modelBuilder);
 
-            modelBuilder.Entity("CouponsSystem.Models.AdminUsers", b =>
+            modelBuilder.Entity("CouponsSystem.Models.AdminUser", b =>
                 {
                     b.Property<int>("Id")
                         .ValueGeneratedOnAdd()
@@ -43,7 +43,7 @@ namespace CouponsSystem.Migrations
                     b.ToTable("AdminUsers");
                 });
 
-            modelBuilder.Entity("CouponsSystem.Models.Coupons", b =>
+            modelBuilder.Entity("CouponsSystem.Models.Coupon", b =>
                 {
                     b.Property<string>("Code")
                         .HasColumnType("varchar(255)");

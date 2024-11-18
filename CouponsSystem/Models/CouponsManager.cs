@@ -25,7 +25,7 @@ namespace CouponsSystem.Models
                 throw new InvalidOperationException("A coupon with this code already exists.");
             }
 
-            var coupon = new Coupons
+            var coupon = new Coupon
             {
                 Code = code,
                 Description = description,
@@ -57,7 +57,7 @@ namespace CouponsSystem.Models
         }
 
         // Update an existing coupon
-        public async Task<bool> UpdateAsync(string couponCode, Coupons updatedCoupon)
+        public async Task<bool> UpdateAsync(string couponCode, Coupon updatedCoupon)
         {
             if (updatedCoupon == null)
             {
@@ -85,13 +85,13 @@ namespace CouponsSystem.Models
         }
 
         // Get a coupon by its code
-        public async Task<Coupons> GetAsync(string couponCode)
+        public async Task<Coupon> GetAsync(string couponCode)
         {
             return await _context.Coupons.FindAsync(couponCode);
         }
 
         // Retrieve all coupons
-        public async Task<List<Coupons>> GetAllCouponsAsync()
+        public async Task<List<Coupon>> GetAllCouponsAsync()
         {
             return await _context.Coupons.ToListAsync();
         }

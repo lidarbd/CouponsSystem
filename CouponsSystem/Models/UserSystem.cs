@@ -2,18 +2,18 @@
 {
     public class UserSystem
     {
-        private Dictionary<int, AdminUsers> adminUsers = new Dictionary<int, AdminUsers>();
+        private Dictionary<int, AdminUser> adminUsers = new Dictionary<int, AdminUser>();
         private HashSet<string> loggedInUserIDs = new HashSet<string>();
 
         public void CreateAdminUser(int id, string password, string username)
         {
-            AdminUsers newAdmin = new AdminUsers(id, password, username);
+            AdminUser newAdmin = new AdminUser(id, password, username);
             addAdminUser(id, newAdmin);
         }
 
         public bool AuthenticateAdminUser(int id, string password)
         {
-            AdminUsers user = GetAdminUser(id);
+            AdminUser user = GetAdminUser(id);
             if (user != null)
             {
                 return user.VerifyPassword(password);
@@ -39,7 +39,7 @@
             return loggedInUserIDs.Remove(id);
         }
 
-        private void addAdminUser(int id, AdminUsers user)
+        private void addAdminUser(int id, AdminUser user)
         {
             if (!adminUsers.ContainsKey(id))
             {
@@ -47,9 +47,9 @@
             }
         }
 
-        public AdminUsers GetAdminUser(int id)
+        public AdminUser GetAdminUser(int id)
         {
-            if (adminUsers.TryGetValue(id, out AdminUsers user))
+            if (adminUsers.TryGetValue(id, out AdminUser user))
             {
                 return user;
             }
