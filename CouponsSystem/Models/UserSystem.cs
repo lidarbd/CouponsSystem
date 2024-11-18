@@ -1,4 +1,5 @@
 ﻿using CouponsSystem.Data;
+using DocumentFormat.OpenXml.Office2010.Excel;
 using Microsoft.EntityFrameworkCore;
 using System.Linq;
 
@@ -22,18 +23,31 @@ namespace CouponsSystem.Models
             await _context.SaveChangesAsync();
         }
 
-        // Authenticate an AdminUser by verifying their password
-        public async Task<bool> AuthenticateAdminUserAsync(int id, string password)
+        // Authenticate an AdminUser by verifying their password and username
+        private async Task<bool> authenticateAdminUserAsync(string username, string password)
         {
-            var user = await _context.AdminUsers.FindAsync(id);
+            var user = await _context.AdminUsers.FirstOrDefaultAsync(u => u.Username == username);
+
+            // Check if user exists and the password is correct
             return user != null && user.VerifyPassword(password);
         }
-        
 
         // Log in a user by adding their ID to the logged-in list
-        public bool LogInUser(string id)
+        public async Task<bool> LogInUserAsync(string username, string password)
         {
-            return _loggedInUserIds.Add(id);
+            // Call AuthenticateAdminUserAsync to validate user credentials
+            bool isValidUserInfo = await authenticateAdminUserAsync(username, password);
+
+            if (isValidUserInfo)
+            {
+                // Find the user again to get their ID
+                var user = await _context.AdminUsers.FirstOrDefaultAsync(u => u.Username == username);
+
+                // Add the user ID to the logged-in list
+                return user != null && _loggedInUserIds.Add(user.Id.ToString());
+            }
+
+            return false; // Login failed
         }
 
         // Check if a user is already logged in
