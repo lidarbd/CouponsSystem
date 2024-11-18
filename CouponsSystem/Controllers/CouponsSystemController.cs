@@ -199,7 +199,39 @@ namespace CouponsSystem.Controllers
 
             try
             {
-                double finalPrice = await _couponsManager.CalculateFinalPriceAsync(couponCodes);
+                // Create a dictionary to count the frequency of each coupon code
+                var couponFrequency = couponCodes.GroupBy(code => code)
+                                                  .ToDictionary(group => group.Key, group => group.Count());
+
+                double finalPrice = 100;  // Assume an initial order amount of 100 ¤
+
+                foreach (var couponCode in couponCodes)
+                {
+                    var coupon = await _couponsManager.GetAsync(couponCode);
+
+                    if (coupon == null)
+                    {
+                        return BadRequest($"Coupon with code {couponCode} not found.");
+                    }
+
+                    // Check if the coupon has expired
+                    if (coupon.ExpirationDate.HasValue && coupon.ExpirationDate.Value < DateTime.UtcNow)
+                    {
+                        return BadRequest($"Coupon {couponCode} has expired.");
+                    }
+
+                    // Step 3: Check if the coupon usage count is within the allowed limit
+                    int usageCount = couponFrequency[couponCode];
+
+                    if (coupon.MaxUsageCount.HasValue && usageCount > coupon.MaxUsageCount)
+                    {
+                        return BadRequest($"Coupon {couponCode} has exceeded its maximum usage limit.");
+                    }
+
+                    // Apply the coupon to the final price
+                    finalPrice =  _couponsManager.CalculateFinalPrice(couponCode, finalPrice, coupon);
+                }
+
                 return Ok(new { FinalPrice = finalPrice });
             }
             catch (Exception ex)

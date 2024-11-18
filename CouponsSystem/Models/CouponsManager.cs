@@ -97,38 +97,22 @@ namespace CouponsSystem.Models
         }
 
         // Method to apply discounts to an order with a fixed amount of 100 ₪
-        public async Task<double> CalculateFinalPriceAsync(List<string> couponCodes, double orderAmount = 100)
+        public double CalculateFinalPrice(string couponCode, double orderAmount = 100, Coupon coupon = null)
         {
             double finalPrice = orderAmount;
 
-            foreach (var code in couponCodes)
+            // Apply the coupon discount logic
+            if (coupon.IsPercentage)
             {
-                var coupon = await _context.Coupons.FirstOrDefaultAsync(c => c.Code == code);
-
-                if (coupon == null)
-                {
-                    throw new InvalidOperationException($"Coupon with code {code} does not exist.");
-                }
-
-                if (coupon.IsPercentage)
-                {
-                    // Apply percentage discount
-                    finalPrice -= finalPrice * (coupon.Discount / 100);
-                }
-                else
-                {
-                    // Apply fixed amount discount
-                    finalPrice -= coupon.Discount;
-                }
-
-                // Ensure the final price doesn't drop below zero
-                if (finalPrice < 0)
-                {
-                    finalPrice = 0;
-                }
+                finalPrice -= finalPrice * (coupon.Discount / 100);
+            }
+            else
+            {
+                finalPrice -= coupon.Discount;
             }
 
-            return finalPrice;
+            return finalPrice < 0 ? 0 : finalPrice;
         }
+
     }
 }
