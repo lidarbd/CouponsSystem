@@ -108,13 +108,15 @@ namespace CouponsSystem.Controllers
                 return BadRequest("Coupon data is required.");
             }
 
+            var createdDateTime = DateTime.UtcNow;
+
             try
             {
                 await _couponsManager.InsertAsync(
                     couponDto.Description,
                     couponDto.Code,
                     couponDto.UserCreatorID,
-                    couponDto.CreatedDateTime,
+                    createdDateTime,
                     couponDto.IsPercentage,
                     couponDto.Discount,
                     couponDto.IsMultipleDiscounts,
@@ -162,25 +164,29 @@ namespace CouponsSystem.Controllers
                 return BadRequest("Updated coupon data is required.");
             }
 
-            var updatedCoupon = new Coupon
+            // Retrieve the coupon by code
+            var existingCoupon = await _couponsManager.GetAsync(couponCode);
+            if (existingCoupon == null)
             {
-                Code = couponCode,
-                Description = couponDto.Description,
-                UserCreatorID = couponDto.UserCreatorID,
-                CreatedDateTime = couponDto.CreatedDateTime,
-                IsPercentage = couponDto.IsPercentage,
-                Discount = couponDto.Discount,
-                IsMultipleDiscounts = couponDto.IsMultipleDiscounts,
-                MaxUsageCount = couponDto.MaxUsageCount,
-                ExpirationDate = couponDto.ExpirationDate
-            };
+                return NotFound("Coupon not found.");
+            }
 
-            bool isUpdated = await _couponsManager.UpdateAsync(couponCode, updatedCoupon);
+            // Update the existing coupon's properties
+            existingCoupon.Description = couponDto.Description;
+            existingCoupon.IsPercentage = couponDto.IsPercentage;
+            existingCoupon.Discount = couponDto.Discount;
+            existingCoupon.IsMultipleDiscounts = couponDto.IsMultipleDiscounts;
+            existingCoupon.MaxUsageCount = couponDto.MaxUsageCount;
+            existingCoupon.ExpirationDate = couponDto.ExpirationDate;
+
+            // Save changes to the database
+            bool isUpdated = await _couponsManager.UpdateAsync(couponCode, existingCoupon);
             if (isUpdated)
             {
                 return Ok("Coupon updated successfully.");
             }
-            return NotFound("Coupon not found.");
+
+            return BadRequest("Error updating the coupon.");
         }
 
         [HttpPost("applyCoupons")]
