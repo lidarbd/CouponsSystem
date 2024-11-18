@@ -1,70 +1,99 @@
-﻿using static Azure.Core.HttpHeader;
+﻿using CouponsSystem.Data;
+using Microsoft.EntityFrameworkCore;
+using System;
+using System.Collections.Generic;
+using System.Linq;
+using System.Threading.Tasks;
 
 namespace CouponsSystem.Models
 {
     public class CouponsManager
     {
-        private Dictionary<string, Coupons> coupons = new Dictionary<string, Coupons>();
+        private readonly AppDbContext _context;
 
+        public CouponsManager(AppDbContext context)
+        {
+            _context = context;
+        }
 
-        //TODO what about all the items we pass, how do we initialize coupon
-        public void Insert(string description, string code, string userCreatorID, DateTime createdDateTime, bool isPercentage, double discount, bool isMultipleDiscounts, int? maxUsageCount = null, DateTime? expirationDate = null)
+        // Insert a coupon into the database
+        public async Task InsertAsync(string description, string code, int userCreatorID, DateTime createdDateTime, bool isPercentage, double discount, bool isMultipleDiscounts, int? maxUsageCount = null, DateTime? expirationDate = null)
         {
             // Check if the coupon code already exists in the system
-            if (coupons.ContainsKey(code))
+            if (await _context.Coupons.AnyAsync(c => c.Code == code))
             {
                 throw new InvalidOperationException("A coupon with this code already exists.");
             }
 
-            //TODO
-            Coupons coupon = new Coupons();
-            //Coupon coupon = new Coupon(description, code, userCreatorID, createdDateTime, isPercentage, discount, isMultipleDiscounts, maxUsageCount, expirationDate);
+            var coupon = new Coupons
+            {
+                Code = code,
+                Description = description,
+                UserCreatorID = userCreatorID,
+                CreatedDateTime = createdDateTime,
+                IsPercentage = isPercentage,
+                Discount = discount,
+                IsMultipleDiscounts = isMultipleDiscounts,
+                MaxUsageCount = maxUsageCount,
+                ExpirationDate = expirationDate
+            };
 
-            // Insert the coupon into the dictionary
-            coupons.Add(coupon.Code, coupon);
+            // Insert the coupon into the database
+            _context.Coupons.Add(coupon);
+            await _context.SaveChangesAsync();
         }
 
-        public bool Delete(string couponCode)
+        // Delete a coupon by its code
+        public async Task<bool> DeleteAsync(string couponCode)
         {
-            if (coupons.ContainsKey(couponCode))
+            var coupon = await _context.Coupons.FindAsync(couponCode);
+            if (coupon != null)
             {
-                coupons.Remove(couponCode);
+                _context.Coupons.Remove(coupon);
+                await _context.SaveChangesAsync();
                 return true; // Successfully deleted coupon
             }
             return false; // Coupon not found
         }
 
-        public bool Update(string couponCode, Coupons updatedCoupon)
+        // Update an existing coupon
+        public async Task<bool> UpdateAsync(string couponCode, Coupons updatedCoupon)
         {
             if (updatedCoupon == null)
             {
                 throw new ArgumentNullException(nameof(updatedCoupon), "Updated coupon cannot be null.");
             }
 
-            if (!coupons.ContainsKey(couponCode))
+            var existingCoupon = await _context.Coupons.FindAsync(couponCode);
+            if (existingCoupon == null)
             {
                 return false; // Coupon not found, cannot update
             }
 
-            // Update the coupon details in the dictionary
-            coupons[couponCode] = updatedCoupon;
+            // Update the coupon details
+            existingCoupon.Description = updatedCoupon.Description;
+            existingCoupon.UserCreatorID = updatedCoupon.UserCreatorID;
+            existingCoupon.CreatedDateTime = updatedCoupon.CreatedDateTime;
+            existingCoupon.IsPercentage = updatedCoupon.IsPercentage;
+            existingCoupon.Discount = updatedCoupon.Discount;
+            existingCoupon.IsMultipleDiscounts = updatedCoupon.IsMultipleDiscounts;
+            existingCoupon.MaxUsageCount = updatedCoupon.MaxUsageCount;
+            existingCoupon.ExpirationDate = updatedCoupon.ExpirationDate;
+
+            await _context.SaveChangesAsync();
             return true;
         }
 
         // Get a coupon by its code
-        public Coupons Get(string couponCode)
+        public async Task<Coupons> GetAsync(string couponCode)
         {
-            if (coupons.ContainsKey(couponCode))
-            {
-                return coupons[couponCode];
-            }
-            return null; // Coupon not found
+            return await _context.Coupons.FindAsync(couponCode);
         }
 
         // Retrieve all coupons
-        public List<Coupons> GetAllCoupons()
+        public async Task<List<Coupons>> GetAllCouponsAsync()
         {
-            return new List<Coupons>(coupons.Values);
+            return await _context.Coupons.ToListAsync();
         }
     }
 }
