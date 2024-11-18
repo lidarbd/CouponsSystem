@@ -81,7 +81,7 @@ namespace CouponsSystem.Controllers
                 return BadRequest("User ID is required.");
             }
 
-            // Convert the userId to string for the HashSet, assuming it stores user IDs as strings
+            // Convert the userId to string for the HashSet
             bool isLoggedOut = _userSystem.LogOutUser(userId.ToString());
 
             if (isLoggedOut)
@@ -94,6 +94,89 @@ namespace CouponsSystem.Controllers
             }
         }
 
+        // Insert a new coupon
+        [HttpPost("createCoupon")]
+        public async Task<IActionResult> CreateCoupon([FromBody] CouponCreationDto couponDto)
+        {
+            if (couponDto == null)
+            {
+                return BadRequest("Coupon data is required.");
+            }
+
+            try
+            {
+                await _couponsManager.InsertAsync(
+                    couponDto.Description,
+                    couponDto.Code,
+                    couponDto.UserCreatorID,
+                    couponDto.CreatedDateTime,
+                    couponDto.IsPercentage,
+                    couponDto.Discount,
+                    couponDto.IsMultipleDiscounts,
+                    couponDto.MaxUsageCount,
+                    couponDto.ExpirationDate
+                );
+                return Ok("Coupon created successfully.");
+            }
+            catch (Exception ex)
+            {
+                return BadRequest($"Error creating coupon: {ex.Message}");
+            }
+        }
+
+        // Get a coupon by code
+        [HttpGet("getCoupon/{couponCode}")]
+        public async Task<IActionResult> GetCoupon(string couponCode)
+        {
+            var coupon = await _couponsManager.GetAsync(couponCode);
+            if (coupon == null)
+            {
+                return NotFound("Coupon not found.");
+            }
+            return Ok(coupon);
+        }
+
+        // Delete a coupon by code
+        [HttpDelete("deleteCoupon/{couponCode}")]
+        public async Task<IActionResult> DeleteCoupon(string couponCode)
+        {
+            bool isDeleted = await _couponsManager.DeleteAsync(couponCode);
+            if (isDeleted)
+            {
+                return Ok("Coupon deleted successfully.");
+            }
+            return NotFound("Coupon not found.");
+        }
+
+        // Update an existing coupon
+        [HttpPut("updateCoupon/{couponCode}")]
+        public async Task<IActionResult> UpdateCoupon(string couponCode, [FromBody] CouponUpdateDto couponDto)
+        {
+            if (couponDto == null)
+            {
+                return BadRequest("Updated coupon data is required.");
+            }
+
+            var updatedCoupon = new Coupon
+            {
+                Code = couponCode,
+                Description = couponDto.Description,
+                UserCreatorID = couponDto.UserCreatorID,
+                CreatedDateTime = couponDto.CreatedDateTime,
+                IsPercentage = couponDto.IsPercentage,
+                Discount = couponDto.Discount,
+                IsMultipleDiscounts = couponDto.IsMultipleDiscounts,
+                MaxUsageCount = couponDto.MaxUsageCount,
+                ExpirationDate = couponDto.ExpirationDate
+            };
+
+            bool isUpdated = await _couponsManager.UpdateAsync(couponCode, updatedCoupon);
+            if (isUpdated)
+            {
+                return Ok("Coupon updated successfully.");
+            }
+            return NotFound("Coupon not found.");
+        }
 
         [HttpGet]
         public async Task<IActionResult> GetAllCoupons()
