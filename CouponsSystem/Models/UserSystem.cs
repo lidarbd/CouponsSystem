@@ -1,59 +1,57 @@
-﻿namespace CouponsSystem.Models
+﻿using CouponsSystem.Data;
+using Microsoft.EntityFrameworkCore;
+using System.Linq;
+
+namespace CouponsSystem.Models
 {
     public class UserSystem
     {
-        private Dictionary<int, AdminUser> adminUsers = new Dictionary<int, AdminUser>();
-        private HashSet<string> loggedInUserIDs = new HashSet<string>();
+        private readonly AppDbContext _context;
+        private HashSet<string> _loggedInUserIds = new HashSet<string>();
 
-        public void CreateAdminUser(int id, string password, string username)
+        public UserSystem(AppDbContext context)
         {
-            AdminUser newAdmin = new AdminUser(id, password, username);
-            addAdminUser(id, newAdmin);
+            _context = context;
         }
 
-        public bool AuthenticateAdminUser(int id, string password)
+        // Create a new AdminUser and save it to the database
+        public async Task CreateAdminUserAsync(int id, string username, string password)
         {
-            AdminUser user = GetAdminUser(id);
-            if (user != null)
-            {
-                return user.VerifyPassword(password);
-            }
-            return false;
+            var newAdmin = new AdminUser(id, username, password);
+            _context.AdminUsers.Add(newAdmin);
+            await _context.SaveChangesAsync();
         }
 
+        // Authenticate an AdminUser by verifying their password
+        public async Task<bool> AuthenticateAdminUserAsync(int id, string password)
+        {
+            var user = await _context.AdminUsers.FindAsync(id);
+            return user != null && user.VerifyPassword(password);
+        }
+        
 
-        // Returns true if logged in successfully
+        // Log in a user by adding their ID to the logged-in list
         public bool LogInUser(string id)
         {
-            return loggedInUserIDs.Add(id);
+            return _loggedInUserIds.Add(id);
         }
 
-        private bool isUserLoggedIn(string id)
+        // Check if a user is already logged in
+        public bool IsUserLoggedIn(string id)
         {
-            return loggedInUserIDs.Contains(id);
+            return _loggedInUserIds.Contains(id);
         }
 
-        // Returns true if logged out successfully
+        // Log out a user by removing their ID from the logged-in list
         public bool LogOutUser(string id)
         {
-            return loggedInUserIDs.Remove(id);
+            return _loggedInUserIds.Remove(id);
         }
 
-        private void addAdminUser(int id, AdminUser user)
+        // Retrieve an AdminUser by ID from the database
+        public async Task<AdminUser?> GetAdminUserAsync(int id)
         {
-            if (!adminUsers.ContainsKey(id))
-            {
-                adminUsers[id] = user;
-            }
-        }
-
-        public AdminUser GetAdminUser(int id)
-        {
-            if (adminUsers.TryGetValue(id, out AdminUser user))
-            {
-                return user;
-            }
-            return null;
+            return await _context.AdminUsers.FindAsync(id);
         }
     }
 }
