@@ -5,23 +5,23 @@ namespace CouponsSystem.Models
 {
     public class Reports
     {
-        private CouponsManager couponsSystem;
+        private CouponsManager _couponsManager;
 
         public Reports(CouponsManager couponsSystem)
         {
-            this.couponsSystem = couponsSystem;
+            this._couponsManager = couponsSystem;
         }
 
         public async Task<List<Coupon>> GetCouponsByUserAsync(int userCreatorID)
         {
-            var coupons = await couponsSystem.GetAllCouponsAsync(); 
+            var coupons = await _couponsManager.GetAllCouponsAsync(); 
             return coupons.Where(c => c.UserCreatorID == userCreatorID).ToList(); 
         }
 
         // Get a list of coupons created within a specific date range
         public async Task<List<Coupon>> GetCouponsByDateRangeAsync(DateTime startDate, DateTime endDate)
         {
-            var coupons = await couponsSystem.GetAllCouponsAsync(); 
+            var coupons = await _couponsManager.GetAllCouponsAsync(); 
             return coupons.Where(c => c.CreatedDateTime >= startDate && c.CreatedDateTime <= endDate).ToList(); 
         }
 
