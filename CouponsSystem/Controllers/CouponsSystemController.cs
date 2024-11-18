@@ -11,17 +11,15 @@ namespace CouponsSystem.Controllers
     [ApiController]
     public class CouponsSystemController : ControllerBase
     {
-        private readonly AppDbContext _appDbContext;
+        private readonly UserSystem _userSystem;
         private readonly CouponsManager _couponsManager;
         private readonly Reports _reports;
-        private readonly UserSystem _userSystem;
 
-        public CouponsSystemController(AppDbContext appDbContext, CouponsManager couponsManager, Reports reports, UserSystem userSystem)
+        public CouponsSystemController(UserSystem userSystem, CouponsManager couponsManager, Reports reports)
         {
-            _appDbContext = appDbContext;
+            _userSystem = userSystem;
             _couponsManager = couponsManager;
             _reports = reports;
-            _userSystem = userSystem;
         }
 
         // Create a new admin user
@@ -197,27 +195,46 @@ namespace CouponsSystem.Controllers
             }
         }
 
-
-        [HttpGet]
-        public async Task<IActionResult> GetAllCoupons()
-        {
-            var coupons = await _couponsManager.GetAllCouponsAsync();
-            return Ok(coupons);
-        }
-    
-
-        [HttpGet("user/{userCreatorID}")]
+        // Get coupons by a specific user
+        [HttpGet("coupons/{userCreatorID}")]
         public async Task<IActionResult> GetCouponsByUser(int userCreatorID)
         {
             var coupons = await _reports.GetCouponsByUserAsync(userCreatorID);
             return Ok(coupons);
         }
 
+        // Get coupons created within a specific date range
         [HttpGet("dateRange")]
         public async Task<IActionResult> GetCouponsByDateRange(DateTime startDate, DateTime endDate)
         {
             var coupons = await _reports.GetCouponsByDateRangeAsync(startDate, endDate);
             return Ok(coupons);
+        }
+
+        // Export coupons to an Excel file
+        [HttpGet("exportToExcel")]
+        public IActionResult ExportCouponsToExcel(DateTime? startDate, DateTime? endDate)
+        {
+            // Default to retrieving all coupons if no date range is provided
+            List<Coupon> coupons;
+            if (startDate.HasValue && endDate.HasValue)
+            {
+                coupons = _reports.GetCouponsByDateRangeAsync(startDate.Value, endDate.Value).Result;
+            }
+            else
+            {
+                coupons = _couponsManager.GetAllCouponsAsync().Result;
+            }
+
+            // Generate a temporary file path to save the Excel file
+            var filePath = Path.Combine(Directory.GetCurrentDirectory(), "CouponsReport.xlsx");
+
+            // Export the coupons to the file
+            _reports.ExportCouponsToExcel(coupons, filePath);
+
+            // Return the file as a download
+            var fileBytes = System.IO.File.ReadAllBytes(filePath);
+            return File(fileBytes, "application/vnd.openxmlformats-officedocument.spreadsheetml.sheet", "CouponsReport.xlsx");
         }
     }
 }

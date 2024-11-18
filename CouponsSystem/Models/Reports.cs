@@ -1,28 +1,33 @@
 ﻿using static Azure.Core.HttpHeader;
 using ClosedXML.Excel;
+using CouponsSystem.Data;
+using Microsoft.EntityFrameworkCore;
 
 namespace CouponsSystem.Models
 {
     public class Reports
     {
-        private CouponsManager _couponsManager;
+        private readonly AppDbContext _context;
 
-        public Reports(CouponsManager couponsSystem)
+        public Reports(AppDbContext context)
         {
-            this._couponsManager = couponsSystem;
+            _context = context;
         }
 
+        // Get coupons by a specific user
         public async Task<List<Coupon>> GetCouponsByUserAsync(int userCreatorID)
         {
-            var coupons = await _couponsManager.GetAllCouponsAsync(); 
-            return coupons.Where(c => c.UserCreatorID == userCreatorID).ToList(); 
+            return await _context.Coupons
+                         .Where(c => c.UserCreatorID == userCreatorID)
+                         .ToListAsync();
         }
 
         // Get a list of coupons created within a specific date range
         public async Task<List<Coupon>> GetCouponsByDateRangeAsync(DateTime startDate, DateTime endDate)
         {
-            var coupons = await _couponsManager.GetAllCouponsAsync(); 
-            return coupons.Where(c => c.CreatedDateTime >= startDate && c.CreatedDateTime <= endDate).ToList(); 
+            return await _context.Coupons
+                         .Where(c => c.CreatedDateTime >= startDate && c.CreatedDateTime <= endDate)
+                         .ToListAsync();
         }
 
         // Export coupons to an Excel file
