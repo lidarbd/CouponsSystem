@@ -1,4 +1,5 @@
 ﻿using System.ComponentModel.DataAnnotations;
+using System.ComponentModel.DataAnnotations.Schema;
 using System.Security.Cryptography;
 using System.Text;
 
@@ -7,16 +8,16 @@ namespace CouponsSystem.Models
     public class AdminUser
     {
         [Key]
+        [DatabaseGenerated(DatabaseGeneratedOption.Identity)]
         public int Id { get; set; }
         public string Username { get; set; } = string.Empty;
         public string HashedPassword { get; set; } = string.Empty;
 
         public AdminUser() { }
-        public AdminUser(int id, string username, string password)
+        public AdminUser(string username, string password)
         {
-            this.Id = id;
-            this.Username = username;
-            this.HashedPassword = HashPassword(password);
+            Username = username;
+            HashedPassword = HashPassword(password);
         }
 
         private string HashPassword(string password)
