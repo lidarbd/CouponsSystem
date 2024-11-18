@@ -1,5 +1,7 @@
 using Microsoft.AspNetCore.Mvc;
 using System;
+using CouponsSystem.Data;
+
 
 namespace CouponsSystem.Controllers
 {
