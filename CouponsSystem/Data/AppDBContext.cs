@@ -5,8 +5,8 @@ namespace CouponsSystem.Data
 {
     public class AppDbContext : DbContext
     {
-        public DbSet<Coupons> Coupons { get; set; } = null!;
-        public DbSet<AdminUsers> AdminUsers { get; set; } = null!;
+        public DbSet<Coupon> Coupons { get; set; } = null!;
+        public DbSet<AdminUser> AdminUsers { get; set; } = null!;
 
         public AppDbContext(DbContextOptions<AppDbContext> options) : base(options) { }
 

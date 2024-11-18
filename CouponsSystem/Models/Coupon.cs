@@ -3,7 +3,7 @@ using System.ComponentModel.DataAnnotations.Schema;
 
 namespace CouponsSystem.Models
 {
-    public class Coupons
+    public class Coupon
     {
         [Key]
         public string Code { get; set; } = string.Empty;   

@@ -4,15 +4,15 @@ using System.Text;
 
 namespace CouponsSystem.Models
 {
-    public class AdminUsers
+    public class AdminUser
     {
         [Key]
         public int Id { get; set; }
         public string Username { get; set; } = string.Empty;
         public string HashedPassword { get; set; } = string.Empty;
 
-        public AdminUsers() { }
-        public AdminUsers(int id, string username, string password)
+        public AdminUser() { }
+        public AdminUser(int id, string username, string password)
         {
             this.Id = id;
             this.Username = username;

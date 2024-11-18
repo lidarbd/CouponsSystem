@@ -12,21 +12,21 @@ namespace CouponsSystem.Models
             this.couponsSystem = couponsSystem;
         }
 
-        public async Task<List<Coupons>> GetCouponsByUserAsync(int userCreatorID)
+        public async Task<List<Coupon>> GetCouponsByUserAsync(int userCreatorID)
         {
             var coupons = await couponsSystem.GetAllCouponsAsync(); 
             return coupons.Where(c => c.UserCreatorID == userCreatorID).ToList(); 
         }
 
         // Get a list of coupons created within a specific date range
-        public async Task<List<Coupons>> GetCouponsByDateRangeAsync(DateTime startDate, DateTime endDate)
+        public async Task<List<Coupon>> GetCouponsByDateRangeAsync(DateTime startDate, DateTime endDate)
         {
             var coupons = await couponsSystem.GetAllCouponsAsync(); 
             return coupons.Where(c => c.CreatedDateTime >= startDate && c.CreatedDateTime <= endDate).ToList(); 
         }
 
         // Export coupons to an Excel file
-        public void ExportCouponsToExcel(List<Coupons> coupons, string filePath)
+        public void ExportCouponsToExcel(List<Coupon> coupons, string filePath)
         {
             using (var workbook = new XLWorkbook())
             {
