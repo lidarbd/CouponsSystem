@@ -22,9 +22,16 @@ namespace CouponsSystem.Controllers
             _reports = reports;
         }
 
+        // For testing
+        [HttpGet("ping")]
+        public IActionResult Ping()
+        {
+            return Ok("pong");
+        }
+
         // Create a new admin user
         [HttpPost("createAdminUser")]
-        public async Task<IActionResult> CreateAdminUser([FromBody] AdminUserCreationDto adminUserDto)
+        public async Task<IActionResult> CreateAdminUser([FromBody] AdminUserDto adminUserDto)
         {
             if (adminUserDto == null)
             {
@@ -40,7 +47,7 @@ namespace CouponsSystem.Controllers
             try
             {
                 // Call UserSystem service to create the admin user
-                await _userSystem.CreateAdminUserAsync(adminUserDto.Id, adminUserDto.Username, adminUserDto.Password);
+                await _userSystem.CreateAdminUserAsync(adminUserDto.Username, adminUserDto.Password);
                 return Ok("Admin user created successfully.");
             }
             catch (Exception ex)
@@ -51,7 +58,7 @@ namespace CouponsSystem.Controllers
 
         // Log in a user
         [HttpPost("logInUser")]
-        public async Task<IActionResult> LogInUser([FromBody] UserLoginDto userLoginDto)
+        public async Task<IActionResult> LogInUser([FromBody] AdminUserDto userLoginDto)
         {
             if (userLoginDto == null)
             {
@@ -72,15 +79,14 @@ namespace CouponsSystem.Controllers
 
         // Log out a user
         [HttpPost("logOutUser")]
-        public IActionResult LogOutUser([FromBody] int userId)
+        public async Task<IActionResult> LogOutUser([FromBody] int userId)
         {
             if (userId == 0) // Check if the userId is zero, which is an invalid value
             {
                 return BadRequest("User ID is required.");
             }
 
-            // Convert the userId to string for the HashSet
-            bool isLoggedOut = _userSystem.LogOutUser(userId.ToString());
+            bool isLoggedOut = await _userSystem.LogOutUser(userId);
 
             if (isLoggedOut)
             {
@@ -91,6 +97,7 @@ namespace CouponsSystem.Controllers
                 return NotFound("User not found or already logged out.");
             }
         }
+
 
         // Insert a new coupon
         [HttpPost("createCoupon")]

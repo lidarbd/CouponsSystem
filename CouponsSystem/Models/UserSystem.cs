@@ -8,7 +8,6 @@ namespace CouponsSystem.Models
     public class UserSystem
     {
         private readonly AppDbContext _context;
-        private HashSet<string> _loggedInUserIds = new HashSet<string>();
 
         public UserSystem(AppDbContext context)
         {
@@ -16,9 +15,9 @@ namespace CouponsSystem.Models
         }
 
         // Create a new AdminUser and save it to the database
-        public async Task CreateAdminUserAsync(int id, string username, string password)
+        public async Task CreateAdminUserAsync(string username, string password)
         {
-            var newAdmin = new AdminUser(id, username, password);
+            var newAdmin = new AdminUser(username, password);
             _context.AdminUsers.Add(newAdmin);
             await _context.SaveChangesAsync();
         }
@@ -35,31 +34,37 @@ namespace CouponsSystem.Models
         // Log in a user by adding their ID to the logged-in list
         public async Task<bool> LogInUserAsync(string username, string password)
         {
-            // Call AuthenticateAdminUserAsync to validate user credentials
             bool isValidUserInfo = await authenticateAdminUserAsync(username, password);
 
             if (isValidUserInfo)
             {
-                // Find the user again to get their ID
                 var user = await _context.AdminUsers.FirstOrDefaultAsync(u => u.Username == username);
-
-                // Add the user ID to the logged-in list
-                return user != null && _loggedInUserIds.Add(user.Id.ToString());
+                if (user != null)
+                {
+                    var loggedInUser = new LoggedInUser
+                    {
+                        UserId = user.Id,
+                    };
+                    _context.LoggedInUsers.Add(loggedInUser);
+                    await _context.SaveChangesAsync();
+                    return true;
+                }
             }
 
             return false; // Login failed
         }
 
-        // Check if a user is already logged in
-        public bool IsUserLoggedIn(string id)
+        // Log out a user by removing their id from the LoggedInUsers table
+        public async Task<bool> LogOutUser(int userId)
         {
-            return _loggedInUserIds.Contains(id);
-        }
-
-        // Log out a user by removing their ID from the logged-in list
-        public bool LogOutUser(string id)
-        {
-            return _loggedInUserIds.Remove(id);
+            var session = await _context.LoggedInUsers.FirstOrDefaultAsync(s => s.UserId == userId);
+            if (session != null)
+            {
+                _context.LoggedInUsers.Remove(session);
+                await _context.SaveChangesAsync();
+                return true;
+            }
+            return false; // User not found
         }
 
         // Retrieve an AdminUser by ID from the database

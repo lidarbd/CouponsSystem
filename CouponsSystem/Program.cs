@@ -1,5 +1,6 @@
 using Microsoft.EntityFrameworkCore;
 using CouponsSystem.Data;
+using CouponsSystem.Models;
 
 var builder = WebApplication.CreateBuilder(args);
 
@@ -13,16 +14,21 @@ builder.Services.AddSwaggerGen();
 var connectionString = builder.Configuration.GetConnectionString("AppDbConnectionString");
 builder.Services.AddDbContext<AppDbContext>(options => options.UseMySql(connectionString, ServerVersion.AutoDetect(connectionString)));
 
+builder.Services.AddScoped<UserSystem>();
+builder.Services.AddScoped<CouponsManager>();
+builder.Services.AddScoped<Reports>();
+
+
 var app = builder.Build();
 
 // Configure the HTTP request pipeline.
 if (app.Environment.IsDevelopment())
 {
     app.UseSwagger();
-    app.UseSwaggerUI();
+    //app.UseSwaggerUI();
 }
 
-app.UseHttpsRedirection();
+//app.UseHttpsRedirection();
 
 app.UseAuthorization();
 
