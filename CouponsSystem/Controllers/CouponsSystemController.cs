@@ -250,9 +250,20 @@ namespace CouponsSystem.Controllers
 
         // Get coupons created within a specific date range
         [HttpGet("dateRange")]
-        public async Task<IActionResult> GetCouponsByDateRange(DateTime startDate, DateTime endDate)
+        public async Task<IActionResult> GetCouponsByDateRange([FromQuery] DateTime startDate, [FromQuery] DateTime endDate)
         {
+            if (startDate == default || endDate == default)
+            {
+                return BadRequest("Invalid date range provided.");
+            }
+
             var coupons = await _reports.GetCouponsByDateRangeAsync(startDate, endDate);
+
+            if (coupons == null || !coupons.Any())
+            {
+                return NotFound("No coupons found for the specified date range.");
+            }
+
             return Ok(coupons);
         }
 
