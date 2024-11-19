@@ -1,0 +1,293 @@
+{
+	"info": {
+		"_postman_id": "85225d45-2ec1-4d0a-8b09-f01a535922c2",
+		"name": "CouponsSystem",
+		"schema": "https://schema.getpostman.com/json/collection/v2.0.0/collection.json",
+		"_exporter_id": "24642071"
+	},
+	"item": [
+		{
+			"name": "Test",
+			"request": {
+				"method": "GET",
+				"header": [],
+				"url": "http://localhost:5196/api/CouponsSystem/ping"
+			},
+			"response": []
+		},
+		{
+			"name": "createAdminUser",
+			"request": {
+				"method": "POST",
+				"header": [],
+				"body": {
+					"mode": "raw",
+					"raw": "{\r\n    \"Username\": \"Lidar2\",\r\n    \"Password\": \"12345\"\r\n}",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": "http://localhost:5196/api/CouponsSystem/createAdminUser"
+			},
+			"response": []
+		},
+		{
+			"name": "logInUser",
+			"request": {
+				"method": "POST",
+				"header": [],
+				"body": {
+					"mode": "raw",
+					"raw": "{\r\n    \"Username\": \"Lidar2\",\r\n    \"Password\": \"12345\"\r\n}",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": "http://localhost:5196/api/CouponsSystem/logInUser"
+			},
+			"response": []
+		},
+		{
+			"name": "logInUserFailedByUserName",
+			"request": {
+				"method": "POST",
+				"header": [],
+				"body": {
+					"mode": "raw",
+					"raw": "{\r\n    \"Username\": \"Lidar3\",\r\n    \"Password\": \"12345\"\r\n}",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": "http://localhost:5196/api/CouponsSystem/logInUser"
+			},
+			"response": []
+		},
+		{
+			"name": "logInUserFailedByPassword",
+			"request": {
+				"method": "POST",
+				"header": [],
+				"body": {
+					"mode": "raw",
+					"raw": "{\r\n    \"Username\": \"Lidar3\",\r\n    \"Password\": \"12\"\r\n}",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": "http://localhost:5196/api/CouponsSystem/logInUser"
+			},
+			"response": []
+		},
+		{
+			"name": "logOutUserExists",
+			"request": {
+				"method": "POST",
+				"header": [],
+				"body": {
+					"mode": "raw",
+					"raw": "2",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": "http://localhost:5196/api/CouponsSystem/logOutUser"
+			},
+			"response": []
+		},
+		{
+			"name": "logOutUserDoesntExist",
+			"request": {
+				"method": "POST",
+				"header": [],
+				"body": {
+					"mode": "raw",
+					"raw": "3",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": "http://localhost:5196/api/CouponsSystem/logOutUser"
+			},
+			"response": []
+		},
+		{
+			"name": "createCoupon",
+			"request": {
+				"method": "POST",
+				"header": [],
+				"body": {
+					"mode": "raw",
+					"raw": "{\r\n  \"Description\": \"10% off on all items\",\r\n  \"Code\": \"SUMMER2024\",\r\n  \"UserCreatorID\": 1,\r\n  \"IsPercentage\": true,\r\n  \"Discount\": 10.0,\r\n  \"IsMultipleDiscounts\": false,\r\n  \"MaxUsageCount\": 100,\r\n  \"ExpirationDate\": \"2024-12-31T23:59:59\"\r\n}\r\n",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": "http://localhost:5196/api/CouponsSystem/createCoupon"
+			},
+			"response": []
+		},
+		{
+			"name": "getCoupon/{couponCode}",
+			"request": {
+				"method": "GET",
+				"header": [],
+				"url": "http://localhost:5196/api/CouponsSystem/getCoupon/SUMMER2024"
+			},
+			"response": []
+		},
+		{
+			"name": "getCouponDoesntExist",
+			"request": {
+				"method": "GET",
+				"header": [],
+				"url": "http://localhost:5196/api/CouponsSystem/getCoupon/SU"
+			},
+			"response": []
+		},
+		{
+			"name": "deleteCoupon/{couponCode}",
+			"request": {
+				"method": "DELETE",
+				"header": [],
+				"url": "http://localhost:5196/api/CouponsSystem/deleteCoupon/SUMMER2024"
+			},
+			"response": []
+		},
+		{
+			"name": "deleteCouponDoesntExist",
+			"request": {
+				"method": "DELETE",
+				"header": [],
+				"url": "http://localhost:5196/api/CouponsSystem/deleteCoupon/SUMMER2024"
+			},
+			"response": []
+		},
+		{
+			"name": "updateCoupon/{couponCode}",
+			"request": {
+				"method": "PUT",
+				"header": [],
+				"body": {
+					"mode": "raw",
+					"raw": "{\r\n  \"Description\": \"10% off on all items\",\r\n  \"Code\": \"SUMMER2024\",\r\n  \"IsPercentage\": true,\r\n  \"Discount\": 20.0,\r\n  \"IsMultipleDiscounts\": false,\r\n  \"MaxUsageCount\": 100,\r\n  \"ExpirationDate\": \"2024-12-31T23:59:59\"\r\n}\r\n",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": "http://localhost:5196/api/CouponsSystem/updateCoupon/SUMMER2024"
+			},
+			"response": []
+		},
+		{
+			"name": "updateCouponDoesntExist",
+			"request": {
+				"method": "PUT",
+				"header": [],
+				"body": {
+					"mode": "raw",
+					"raw": "{\r\n  \"Description\": \"10% off on all items\",\r\n  \"Code\": \"SUMMER2024\",\r\n  \"IsPercentage\": true,\r\n  \"Discount\": 20.0,\r\n  \"IsMultipleDiscounts\": false,\r\n  \"MaxUsageCount\": 100,\r\n  \"ExpirationDate\": \"2024-12-31T23:59:59\"\r\n}\r\n",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": "http://localhost:5196/api/CouponsSystem/updateCoupon/SU"
+			},
+			"response": []
+		},
+		{
+			"name": "applyCoupons",
+			"request": {
+				"method": "POST",
+				"header": [],
+				"body": {
+					"mode": "raw",
+					"raw": "[\"SUMMER2024\", \"SUMMER2023\"]",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": "http://localhost:5196/api/CouponsSystem/applyCoupons"
+			},
+			"response": []
+		},
+		{
+			"name": "coupons/{userCreatorID}",
+			"request": {
+				"method": "GET",
+				"header": [],
+				"url": "http://localhost:5196/api/CouponsSystem/coupons/1"
+			},
+			"response": []
+		},
+		{
+			"name": "couponsByUserIdNotExists",
+			"request": {
+				"method": "GET",
+				"header": [],
+				"url": "http://localhost:5196/api/CouponsSystem/coupons/0"
+			},
+			"response": []
+		},
+		{
+			"name": "dateRange",
+			"request": {
+				"method": "GET",
+				"header": [],
+				"url": {
+					"raw": "http://localhost:5196/api/CouponsSystem/dateRange?startDate=2024-11-01T00:00:00&endDate=2024-11-30T23:59:59",
+					"protocol": "http",
+					"host": [
+						"localhost"
+					],
+					"port": "5196",
+					"path": [
+						"api",
+						"CouponsSystem",
+						"dateRange"
+					],
+					"query": [
+						{
+							"key": "startDate",
+							"value": "2024-11-01T00:00:00"
+						},
+						{
+							"key": "endDate",
+							"value": "2024-11-30T23:59:59"
+						}
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "exportToExcel",
+			"request": {
+				"method": "GET",
+				"header": [],
+				"url": "http://localhost:5196/api/CouponsSystem/exportToExcel"
+			},
+			"response": []
+		}
+	]
+}
