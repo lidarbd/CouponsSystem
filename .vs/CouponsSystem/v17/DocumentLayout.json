@@ -13,6 +13,10 @@
     {
       "AbsoluteMoniker": "D:0:0:{B8AB8F4F-894A-4D01-9C38-A86EB79BABBF}|CouponsSystem\\CouponsSystem.csproj|c:\\src\\github.com\\lidarbd\\couponssystem\\couponssystem\\models\\coupon.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
       "RelativeMoniker": "D:0:0:{B8AB8F4F-894A-4D01-9C38-A86EB79BABBF}|CouponsSystem\\CouponsSystem.csproj|solutionrelative:couponssystem\\models\\coupon.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{B8AB8F4F-894A-4D01-9C38-A86EB79BABBF}|CouponsSystem\\CouponsSystem.csproj|c:\\src\\github.com\\lidarbd\\couponssystem\\couponssystem\\models\\couponsmanager.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{B8AB8F4F-894A-4D01-9C38-A86EB79BABBF}|CouponsSystem\\CouponsSystem.csproj|solutionrelative:couponssystem\\models\\couponsmanager.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
     }
   ],
   "DocumentGroupContainers": [
@@ -22,7 +26,7 @@
       "DocumentGroups": [
         {
           "DockedWidth": 200,
-          "SelectedChildIndex": 2,
+          "SelectedChildIndex": 3,
           "Children": [
             {
               "$type": "Bookmark",
@@ -36,9 +40,22 @@
               "RelativeDocumentMoniker": "CouponsSystem\\Models\\Coupon.cs",
               "ToolTip": "C:\\src\\github.com\\lidarbd\\CouponsSystem\\CouponsSystem\\Models\\Coupon.cs",
               "RelativeToolTip": "CouponsSystem\\Models\\Coupon.cs",
-              "ViewState": "AgIAAAAAAAAAAAAAAAAAAAUAAAAAAAAAAAAAAA==",
+              "ViewState": "AgIAAAUAAAAAAAAAAADwvwgAAAA0AAAAAAAAAA==",
               "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
-              "WhenOpened": "2024-11-18T21:10:41.546Z",
+              "WhenOpened": "2024-11-19T00:06:39.883Z",
+              "EditorCaption": ""
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 3,
+              "Title": "CouponsManager.cs",
+              "DocumentMoniker": "C:\\src\\github.com\\lidarbd\\CouponsSystem\\CouponsSystem\\Models\\CouponsManager.cs",
+              "RelativeDocumentMoniker": "CouponsSystem\\Models\\CouponsManager.cs",
+              "ToolTip": "C:\\src\\github.com\\lidarbd\\CouponsSystem\\CouponsSystem\\Models\\CouponsManager.cs",
+              "RelativeToolTip": "CouponsSystem\\Models\\CouponsManager.cs",
+              "ViewState": "AgIAAFcAAAAAAAAAAAA7wGUAAAAiAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
+              "WhenOpened": "2024-11-18T22:32:14.028Z",
               "EditorCaption": ""
             },
             {
@@ -49,7 +66,7 @@
               "RelativeDocumentMoniker": "CouponsSystem\\Program.cs",
               "ToolTip": "C:\\src\\github.com\\lidarbd\\CouponsSystem\\CouponsSystem\\Program.cs",
               "RelativeToolTip": "CouponsSystem\\Program.cs",
-              "ViewState": "AgIAAAkAAAAAAAAAAAAuwCQAAAAAAAAAAAAAAA==",
+              "ViewState": "AgIAABAAAAAAAAAAAAAwwCQAAAAAAAAAAAAAAA==",
               "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
               "WhenOpened": "2024-11-18T18:09:10.242Z",
               "EditorCaption": ""
@@ -62,7 +79,7 @@
               "RelativeDocumentMoniker": "CouponsSystem\\Controllers\\CouponsSystemController.cs",
               "ToolTip": "C:\\src\\github.com\\lidarbd\\CouponsSystem\\CouponsSystem\\Controllers\\CouponsSystemController.cs",
               "RelativeToolTip": "CouponsSystem\\Controllers\\CouponsSystemController.cs",
-              "ViewState": "AgIAAHYAAAAAAAAAAAAowIkAAAA3AAAAAAAAAA==",
+              "ViewState": "AgIAAPMAAAAAAAAAAAAwwAwBAAAAAAAAAAAAAA==",
               "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
               "WhenOpened": "2024-11-18T14:03:26.833Z",
               "EditorCaption": ""
